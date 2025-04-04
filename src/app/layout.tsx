@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Import Inter font
 import "./globals.css";
+import Navbar from "@/components/layout/navbar";
 
 const inter = Inter({
   variable: "--font-inter", // Define a CSS variable for the font
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
+        <Navbar />
         {children}
       </body>
     </html>
