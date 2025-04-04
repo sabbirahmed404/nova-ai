@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 226 58% 9%;
+    --foreground: 210 40% 98%;
+
+    --card: 226 58% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 226 58% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 193 100% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 285 100% 47%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 226 58% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 273 57% 63%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 226 58% 15%;
+    --input: 226 58% 15%;
+    --ring: 193 100% 50%;
+
+    --radius: 0.75rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: var(--background, hsl(226 58% 9%));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    background-image: radial-gradient(circle at 50% 50%, #0A0F24 0%, #070B1A 100%);
+  }
+  
+  .glass {
+    background-color: hsla(var(--card) / 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-card {
+    background-color: hsla(var(--card) / 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+  }
+  
+  .glass-card:hover {
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 30px rgba(139, 92, 246, 0.3);
+  }
+  
+  .gradient-text {
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(to right, #00F5FF, #8B5CF6);
+  }
+  
+  .gradient-border {
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    margin: -1px;
+    border-radius: inherit;
+    background: linear-gradient(to right, #00F5FF, #8B5CF6, #FF00E5);
+  }
+  
+  .neon-button {
+    position: relative;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    background: linear-gradient(90deg, #00F5FF 0%, #8B5CF6 50%, #FF00E5 100%);
+    background-size: 200% auto;
+  }
+  
+  .neon-button:hover {
+    background-position: right center;
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5), 0 0 25px rgba(139, 92, 246, 0.3);
+  }
+  
+  .typing-container {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 4px solid #00F5FF;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  .hover-card-effect {
+    transition: all 0.3s;
+  }
+  
+  .hover-card-effect:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3), 0 0 30px rgba(139, 92, 246, 0.2);
+  }
+  
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #00F5FF;
+    opacity: 0.5;
+    box-shadow: 0 0 10px #00F5FF, 0 0 20px #00F5FF;
+    animation: float 8s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
+  }
+  
+  .gradient-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2;
+    filter: blur(48px);
+    background: radial-gradient(circle, rgba(0,245,255,0.5) 0%, rgba(139,92,246,0.3) 50%, rgba(255,0,229,0.1) 100%);
+  }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00F5FF }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-20px) }
+  100% { transform: translateY(0px) }
+}
+
+@keyframes pulse-glow {
+  0% { opacity: 0.3 }
+  50% { opacity: 0.7 }
+  100% { opacity: 0.3 }
 }
