@@ -85,7 +85,7 @@ const PricingPlans: React.FC = () => {
             <button
               onClick={() => setIsYearly(!isYearly)}
               className={`w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
-                isYearly ? "bg-nova-blue" : "bg-gray-600"
+                isYearly ? "bg-[#00F5FF]" : "bg-gray-600"
               }`}
               aria-label={
                 isYearly
@@ -105,7 +105,7 @@ const PricingPlans: React.FC = () => {
               }`}
             >
               Yearly
-              <span className="bg-nova-blue/20 text-nova-blue text-xs px-2 py-0.5 rounded-full">
+              <span className="bg-[#00F5FF]/20 text-[#00F5FF] text-xs px-2 py-0.5 rounded-full">
                 Save 20%
               </span>
             </span>
@@ -118,12 +118,12 @@ const PricingPlans: React.FC = () => {
               key={index}
               className={`glass-card border-white/10 overflow-hidden ${
                 plan.highlight
-                  ? "border-nova-blue relative shadow-neon-blue"
+                  ? "border-[#00F5FF] relative shadow-[#00F5FF]"
                   : ""
               }`}
             >
               {plan.highlight && (
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-nova-blue to-nova-purple"></div>
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00F5FF] to-[#8B5CF6]"></div>
               )}
               <CardHeader>
                 <CardTitle className="text-2xl font-bold">
@@ -145,7 +145,7 @@ const PricingPlans: React.FC = () => {
                 <ul className="space-y-3">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-nova-blue shrink-0 mt-0.5" />
+                      <Check className="h-5 w-5 text-[#00F5FF] shrink-0 mt-0.5" />
                       <span className="text-sm text-gray-300">{feature}</span>
                     </li>
                   ))}
@@ -156,7 +156,7 @@ const PricingPlans: React.FC = () => {
                   className={`w-full ${
                     plan.highlight
                       ? "neon-button"
-                      : "border border-nova-blue text-white hover:bg-nova-blue/20"
+                      : "border border-[#00F5FF] text-white hover:bg-[#00F5FF]/20"
                   }`}
                 >
                   Get Started
