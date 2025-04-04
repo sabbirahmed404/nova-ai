@@ -1,5 +1,6 @@
 "use client"
 
+import AIAssistants from "./ai-assistants";
 import Features from "./features";
 import Hero from "./hero";
 import ParticleBackground from "./particle-background";
@@ -10,6 +11,7 @@ const HomePage = () => {
             <ParticleBackground />
             <Hero />
             <Features />
+            <AIAssistants />
         </div>
     );
 };
