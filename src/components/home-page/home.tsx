@@ -6,7 +6,7 @@ import Features from "./features";
 import Hero from "./hero";
 import ParticleBackground from "./particle-background";
 import PricingPlans from "./pricing-plans";
-import ReadyToTransform from "./ready-to-transform";
+import AITransformationCallout from "./ai-transformation-callout";
 import TechStack from "./tech-stack";
 
 const HomePage = () => {
@@ -19,7 +19,7 @@ const HomePage = () => {
       <TechStack />
       <PricingPlans />
       <Contact />
-      <ReadyToTransform />
+      <AITransformationCallout />
     </div>
   );
 };

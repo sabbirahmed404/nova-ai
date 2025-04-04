@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +32,8 @@ const Navbar = () => {
     { name: 'Features', link: '#features' },
     { name: 'AI Assistants', link: '#assistants' },
     { name: 'Technology', link: '#technology' },
-    { name: 'Pricing', link: '#' },
-    { name: 'Contact', link: '#' },
+    { name: 'Pricing', link: '#pricing' },
+    { name: 'Contact', link: '#contact' },
   ];
 
   return (
@@ -44,9 +45,9 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <a href="#" className="flex items-center">
+            <Link href="/" className="flex items-center">
               <span className="text-2xl font-bold gradient-text">Nova<span className="text-white">AI</span></span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
