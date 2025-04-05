@@ -65,7 +65,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
               <a
                 key={index}
@@ -79,15 +79,17 @@ const Navbar = () => {
             <div className="space-x-4">
               <Link href={"/login"}>
                 <Button className="border border-[#00F5FF] text-white hover:bg-[#00F5FF]/20">
-                  Login
+                  Sign In
                 </Button>
               </Link>
-              <Button className="neon-button">Get Started</Button>
+              <Link href={'/sign-up'}>
+              <Button className="neon-button">Sign Up</Button>
+              </Link>
             </div>
           </div>
 
           {/* Mobile Navigation Icon */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={toggleMenu}
               className="text-gray-300 hover:text-white focus:outline-none"
@@ -100,7 +102,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`md:hidden glass absolute w-full transition-all duration-500 ease-in-out ${
+        className={`lg:hidden glass absolute w-full transition-all duration-500 ease-in-out ${
           isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-10 pointer-events-none"
