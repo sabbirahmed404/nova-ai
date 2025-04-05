@@ -76,7 +76,14 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button className="neon-button">Get Started</Button>
+            <div className="space-x-4">
+              <Link href={"/login"}>
+                <Button className="border border-[#00F5FF] text-white hover:bg-[#00F5FF]/20">
+                  Login
+                </Button>
+              </Link>
+              <Button className="neon-button">Get Started</Button>
+            </div>
           </div>
 
           {/* Mobile Navigation Icon */}
