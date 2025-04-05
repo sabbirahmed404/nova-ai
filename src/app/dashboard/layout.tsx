@@ -1,15 +1,20 @@
-import { AppSidebar } from "@/components/layout/app-sidebar"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
+// import { Sidebar } from "@/components/layout/sidebar";
+import { Sidebar } from "@/components/layout/sidebar";
+import React from "react";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+const DashboardLayout = ({ children }) => {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
-    </SidebarProvider>
-  )
-}
+    <div className="flex h-screen bg-nova-dark">
+      {/* Sidebar */}
+      <Sidebar role="user" />
+
+      {/* Main Content */}
+      <div className="flex-1 overflow-auto">
+        <div className="p-8">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+export default DashboardLayout;
