@@ -15,48 +15,60 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
-import { FiGithub } from "react-icons/fi";
-import { FaGoogle } from "react-icons/fa";
+import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import ParticleBackground from "@/components/shared/particle-background";
 import Link from "next/link";
+import { FaGoogle } from "react-icons/fa";
+import { FiGithub } from "react-icons/fi";
 
-const loginSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  password: z
-    .string()
-    .min(6, { message: "Password must be at least 6 characters" }),
-  rememberMe: z.boolean().optional(),
-});
+const signUpSchema = z
+  .object({
+    name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+    email: z.string().email({ message: "Please enter a valid email address" }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters",
+    }),
+    confirmPassword: z.string(),
+    acceptTerms: z.boolean().refine((val) => val === true, {
+      message: "You must accept the terms and conditions",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
-type LoginFormValues = z.infer<typeof loginSchema>;
+type SignUpFormValues = z.infer<typeof signUpSchema>;
 
-const Login = () => {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
 
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<SignUpFormValues>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
-      rememberMe: false,
+      confirmPassword: "",
+      acceptTerms: false,
     },
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    // This is a placeholder for actual authentication logic
-    console.log("Login data:", data);
+  const onSubmit = (data: SignUpFormValues) => {
+    // This is a placeholder for actual registration logic
+    console.log("SignUp data:", data);
 
     // Show success toast
-    toast("Login Successful", {
-      description: "Welcome back to NovaAI",
+    toast("Account created", {
+      description: "Welcome to NovaAI!",
     });
 
-    // Redirect to home page after successful login
-    setTimeout(() => router.push("/"), 1500);
+    // Redirect to login page after successful registration
+    setTimeout(() => router.push("/login"), 1500);
   };
 
   return (
@@ -71,15 +83,15 @@ const Login = () => {
             </span>
           </Link>
           <h2 className="mt-2 text-3xl font-extrabold text-white">
-            Sign in to your account
+            Create your account
           </h2>
           <p className="mt-2 text-sm text-gray-400">
-            Or{" "}
+            Already have an account?{" "}
             <Link
-              href="/sign-up"
+              href="/login"
               className="font-medium text-nova-blue hover:text-nova-purple"
             >
-              create a new account
+              Sign in
             </Link>
           </p>
         </div>
@@ -88,10 +100,31 @@ const Login = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300">Full Name</FormLabel>
+                  <div className="relative">
+                    <User className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                    <FormControl>
+                      <Input
+                        placeholder="John Doe"
+                        className="pl-10 bg-card/50 border-white/10 text-white focus:border-nova-blue"
+                        {...field}
+                      />
+                    </FormControl>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">Email</FormLabel>
+                  <FormLabel className="text-gray-300">Email Address</FormLabel>
                   <div className="relative">
                     <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
                     <FormControl>
@@ -140,38 +173,75 @@ const Login = () => {
               )}
             />
 
-            <div className="flex items-center justify-between">
-              <FormField
-                control={form.control}
-                name="rememberMe"
-                render={({ field }) => (
-                  <div className="flex items-center space-x-2">
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-300">
+                    Confirm Password
+                  </FormLabel>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                    <FormControl>
+                      <Input
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        className="pl-10 bg-card/50 border-white/10 text-white focus:border-nova-blue"
+                        {...field}
+                      />
+                    </FormControl>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      className="absolute right-3 top-2.5 text-gray-400 hover:text-white"
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="acceptTerms"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center space-x-2 space-y-0 py-2">
+                  <FormControl>
                     <Checkbox
-                      id="rememberMe"
                       checked={field.value}
                       onCheckedChange={field.onChange}
                       className="border-white/20 data-[state=checked]:bg-[#00F5FF] text-black"
                     />
-                    <label
-                      htmlFor="rememberMe"
-                      className="text-sm font-medium text-gray-300 cursor-pointer"
-                    >
-                      Remember me
-                    </label>
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="text-sm text-gray-300">
+                      I agree to the
+                      <span className="text-[#00F5FF]">
+                        terms and conditions
+                      </span>
+                      privacy policy
+                    </FormLabel>
+                    <FormMessage />
                   </div>
-                )}
-              />
+                </FormItem>
+              )}
+            />
 
-              <Link
-                href="/forgot-password"
-                className="text-sm text-nova-blue hover:text-nova-purple"
-              >
-                Forgot password?
-              </Link>
-            </div>
-
-            <Button type="submit" className="neon-button w-full py-6">
-              Sign In
+            <Button
+              type="submit"
+              className="neon-button w-full py-6"
+              disabled={!form.formState.isValid}
+            >
+              Create Account
             </Button>
           </form>
         </Form>
@@ -214,4 +284,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
