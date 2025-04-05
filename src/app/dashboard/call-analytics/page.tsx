@@ -6,7 +6,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
@@ -31,6 +31,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Download, Phone, PhoneMissed, Clock } from "lucide-react";
+import StatCard from "@/components/dashboard/clients/quick-stat-card";
 
 const CallAnalyticsPage = () => {
   const callData = [
@@ -106,17 +107,7 @@ const CallAnalyticsPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {statsCards.map((card, index) => (
-          <Card key={index} className="glass-card">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-sm font-medium text-gray-400">
-                {card.label}
-              </CardTitle>
-              <card.icon className="h-4 w-4 text-nova-blue" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{card.value}</div>
-            </CardContent>
-          </Card>
+          <StatCard key={index} card={card} />
         ))}
       </div>
 

@@ -2,9 +2,10 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts';
 import { Bot, Phone, Clock, Calendar } from 'lucide-react';
+import StatCard from '@/components/dashboard/clients/quick-stat-card';
 
 const UserDashboard = () => {
   const userData = {
@@ -39,15 +40,7 @@ const UserDashboard = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statsCards.map((card, index) => (
-          <Card key={index} className="glass-card">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-sm font-medium text-gray-400">{card.label}</CardTitle>
-              <card.icon className="h-4 w-4 text-nova-blue" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{card.value}</div>
-            </CardContent>
-          </Card>
+         <StatCard key={index} card={card} />
         ))}
       </div>
 
