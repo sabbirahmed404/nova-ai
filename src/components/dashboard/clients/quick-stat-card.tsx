@@ -4,7 +4,7 @@ import React from 'react';
 // Define the cardType interface for type safety
 interface CardType {
   label: string; // The title or label of the card
-  icon: React.ComponentType; // A React component for the icon
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; // A React component for the icon
   value: string | number; // The value displayed in the card
 }
 

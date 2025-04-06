@@ -14,7 +14,7 @@ import {
 import { Search, Filter, Eye, UserX, Edit } from "lucide-react";
 
 const UserManagementPage = () => {
-  const [users, setUsers] = useState([
+  const [users] = useState([
     {
       id: 1,
       name: "John Smith",

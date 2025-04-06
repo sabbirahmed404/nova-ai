@@ -12,6 +12,7 @@ interface Particle {
 
 const ParticleBackground: React.FC = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
