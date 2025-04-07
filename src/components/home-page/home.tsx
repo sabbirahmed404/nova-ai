@@ -12,7 +12,6 @@ import TechStack from "./tech-stack";
 const HomePage = () => {
   return (
     <div>
-      <ParticleBackground />
       <Hero />
       <Features />
       <AIAssistants />

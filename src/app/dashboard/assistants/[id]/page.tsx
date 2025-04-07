@@ -15,7 +15,7 @@ interface Message {
   timestamp: Date;
 }
 
-const PromptPage = () => {
+const PromptPage = ({params}) => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',

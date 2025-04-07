@@ -77,6 +77,48 @@ const AssistantsPage = () => {
     },
   ];
 
+  interface AssistantProps {
+    assistant: {
+      id: number;
+      name: string;
+      type: string;
+      description: string;
+    };
+  }
+
+  const AssistantCard = ({ assistant }: AssistantProps) => {
+    return (
+      <Card className="glass-card">
+        <CardHeader className="flex flex-row items-start justify-between">
+          <div>
+            <CardTitle className="flex items-center gap-2">
+              <Bot className="h-5 w-5 text-nova-blue" />
+              {assistant.name}
+            </CardTitle>
+            <CardDescription>{assistant.type}</CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-gray-400">{assistant.description}</p>
+          <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
+            <div>
+              <p className="text-gray-400">Response Time</p>
+              <p className="font-medium">1.4s</p>
+            </div>
+          </div>
+        </CardContent>
+        <CardFooter>
+          {/* Explore Button with Link */}
+          <Link href={`/dashboard/assistants/${assistant.id}`} passHref>
+            <Button variant="outline" size="sm" className="w-full border border-[#00F5FF] text-white hover:bg-[#00F5FF]/20">
+              Explore
+            </Button>
+          </Link>
+        </CardFooter>
+      </Card>
+    );
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -93,46 +135,5 @@ const AssistantsPage = () => {
   );
 };
 
-interface AssistantProps {
-  assistant: {
-    id: number;
-    name: string;
-    type: string;
-    description: string;
-  };
-}
-
-const AssistantCard = ({ assistant }: AssistantProps) => {
-  return (
-    <Card className="glass-card">
-      <CardHeader className="flex flex-row items-start justify-between">
-        <div>
-          <CardTitle className="flex items-center gap-2">
-            <Bot className="h-5 w-5 text-nova-blue" />
-            {assistant.name}
-          </CardTitle>
-          <CardDescription>{assistant.type}</CardDescription>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-gray-400">{assistant.description}</p>
-        <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
-          <div>
-            <p className="text-gray-400">Response Time</p>
-            <p className="font-medium">1.4s</p>
-          </div>
-        </div>
-      </CardContent>
-      <CardFooter>
-        {/* Explore Button with Link */}
-        <Link href={`/`} passHref>
-          <Button variant="outline" size="sm" className="w-full border border-[#00F5FF] text-white hover:bg-[#00F5FF]/20">
-            Explore
-          </Button>
-        </Link>
-      </CardFooter>
-    </Card>
-  );
-};
 
 export default AssistantsPage;
