@@ -82,8 +82,8 @@ const Navbar = () => {
                   Sign In
                 </Button>
               </Link>
-              <Link href={'/sign-up'}>
-              <Button className="neon-button">Sign Up</Button>
+              <Link href={"/sign-up"}>
+                <Button className="neon-button">Sign Up</Button>
               </Link>
             </div>
           </div>

@@ -9,7 +9,7 @@ export default function DashboardLayout({
   return (
     <div className="flex h-screen bg-nova-dark">
     {/* Sidebar */}
-    <Sidebar role="admin" />
+    <Sidebar role="user" />
 
     {/* Main Content */}
     <div className="flex-1 overflow-auto">

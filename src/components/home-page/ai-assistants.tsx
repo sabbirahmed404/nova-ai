@@ -162,7 +162,7 @@ const AIAssistants: React.FC = () => {
         </div>
       </div>
 
-      <Link href={"/"} className="flex justify-center">
+      <Link href={"/dashboard/assistants"} className="flex justify-center">
         <Button className="neon-button">Explore More Agent</Button>
       </Link>
     </section>
