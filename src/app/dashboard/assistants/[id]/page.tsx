@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, use } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -15,7 +15,18 @@ interface Message {
   timestamp: Date;
 }
 
-const PromptPage = ({params}) => {
+interface PageProps {
+  params: {
+    id: string; // Define the type of the dynamic parameter
+  };
+}
+
+const PromptPage = ({params}: PageProps) => {
+  // Unwrap the params promise using use()
+  const unwrappedParams = use(params);
+  const { id } = unwrappedParams;
+  console.log(id);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
